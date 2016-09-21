@@ -5,6 +5,7 @@
 -  Guide to using sockets by Brian "Beej" Hall
 -  Tcpdump manual
 -  Chapters 6, 7 y 8 of "Linux Socket Programming" by Sean Walton, Sams Publishing Co. 2001
+-  Fichero cheat sheet en este proyecto
 
 ### Prácticas con sockets
 Descripción de las prácticas de sockets Las prácticas de sockets se dividen en tres partes:
