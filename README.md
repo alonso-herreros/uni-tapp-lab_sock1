@@ -28,8 +28,16 @@ Puedes refrescar la diferencia entre pasivos y activos así como las llamadas al
 
 <img src="https://gitlab.pervasive.it.uc3m.es/aptel/intro-sockets/raw/master/overview_of_system_calls_used_with_stream_sockets.png" width="500px">
 
-En esta práctica dispone de todos los ficheros necesarios para probar un servidor secuencial. Para ello, use el siguiente comando:
+En esta práctica dispone de todos los ficheros necesarios para probar un servidor secuencial (se encuentra el código de un servidor de eco secuencial, y de un cliente de eco). Para ello, use el siguiente comando:
  ```
- git -c http.sslVerify=false clone https://gitlab.pervasive.it.uc3m.es/distributed-computing-assignements/2-app-engine-servlet-jsp.git
+ git -c http.sslVerify=false clone https://gitlab.pervasive.it.uc3m.es/aptel/sockets1_sequential_servers.git
  ```
+ Encontrarás dos ficheros principales. El primero es `EchoServer_seq.c`, que implementa el servidor. El segundo es `EchoClient.c` que implementa el cliente. El protocolo que implementan es ECHO sobre TCP/IP. En dicho servicio, el cliente de echo se conecta a un servidor de echo que copia de vuelta todo lo enviado por el cliente.
+ 
+ ## Actividades
+ 
+ ### 1. Compila y ejecuta los ejemplos
+ 
+ > En la explicación de la práctica se habla del puerto 8xxx, esto indica que debéis utilizar como puerto el resultado de sumarle a 8000 los tres últimos números de la dirección IP de la máquina en la que ejecuta el servidor. De esta forma, evitamos interferencias entre las prácticas realizadas por los diferentes grupos.
+ 
  
