@@ -1,3 +1,5 @@
+[English version] (https://gitlab.pervasive.it.uc3m.es/aptel/sockets1_sequential_servers/blob/master/README_EN.md)
+
 # Servidores secuenciales con el API de sockets
 
 ### Material de soporte
