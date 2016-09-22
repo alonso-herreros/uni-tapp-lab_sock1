@@ -97,7 +97,6 @@ Have a look to the server code (EchoServer_seq.c) and the comments and question 
 Waiting for incomming connections at port 8765
 Incomming connection from 127.0.0.1 remote port 52589
 ```
-
 ```
 netstat -putan
 Active Internet connections (servers and established)
@@ -123,7 +122,7 @@ tcp6 0 0 [::]:32769 [::]:* LISTEN
 
 We are now going to observe the TCP connections with the tcpdump tool. We instruct the tool to report on the entire traffic passing via the local-loop interface (loopback) whose origin or destination port is 8xxx.
 
-## 2. Execute the following command in another window: 
+### 2. Execute the following command in another window: 
 
 ```
 sudo tcpdump -i lo port 8xxx
@@ -142,9 +141,9 @@ listening on lo, link-type EN10MB (Ethernet), capture size 65535 bytes
 
 Re-start the client and observe the exchange of frames with tcpdump (connection establishment, sending of data in both directions, acknowledgements and end of connection).
 
-## 3. Start the client a couple of times and terminate it with CTRL-D or CTRL-C. Now kill the server with CTRL-C. What do you observe with tcpdump? Why? 
+### 3. Start the client a couple of times and terminate it with CTRL-D or CTRL-C. Now kill the server with CTRL-C. What do you observe with tcpdump? Why? 
 
-***Solve the problem ***
+**Solve the problem**
 You may find it useful to observe the status of the client's network connections using the command:
 
 ```
@@ -153,13 +152,13 @@ netstat –tn
 
 From here on, we use remote clients which we will start after executing the slogin or ssh command (to execute commands on another machine). We will need to stop and re-start tcpdump, this time without specifying the interface so that it monitors the traffic on all interfaces except the local loop. 
 
-## 4. Restart the (modified) server, start the client and kill the server without killing the client. What happens on re-starting the server? Why?
+### 4. Restart the (modified) server, start the client and kill the server without killing the client. What happens on re-starting the server? Why?
 
-## 5. Kill the client, wait a few seconds then re-start the server. Now start two echo clients (on two different hosts) that connect to the same server. What happens if after starting the first client but before asking for an echo, we start the second? Both clients send information. What happens? 
+### 5. Kill the client, wait a few seconds then re-start the server. Now start two echo clients (on two different hosts) that connect to the same server. What happens if after starting the first client but before asking for an echo, we start the second? Both clients send information. What happens? 
 
-## 6. Now kill the second client and then kill the first. You should observe a RESET frame. Why?
+### 6. Now kill the second client and then kill the first. You should observe a RESET frame. Why?
 
-## 7. Change the size of the connection queue (backlog of the socket) of the server, defined by the constant QLEN in the file TCPechod_seq, to 1. Now re-start four echo clients from another host. What do you notice in tcpdump? Kill the last client to be started. What is the effect of doing so? What explanation can you give for this?
+### 7. Change the size of the connection queue (backlog of the socket) of the server, defined by the constant QLEN in the file TCPechod_seq, to 1. Now re-start four echo clients from another host. What do you notice in tcpdump? Kill the last client to be started. What is the effect of doing so? What explanation can you give for this?
 
 We are now going to use setsockopt to set socket options offered to the client. One such option is the choice of whether or not to use the Nagle algorithm. In the code supplied, the Nagle algorithm can be disabled by uncommenting the following lines of code in the file TCPecho.c just before the call to socket:
 
@@ -171,6 +170,6 @@ errexit("setsockopt: no puedo deshabilitar Nagle");
 
 However, with the Linux kernel installed in the labs, the effect of setting this option is not visible. For this reason we will not experiment with it but will instead check the effect of setting two of the other possible options. For more information about the other socket options that can be set, consult the man pages ip(7), tcp(7), socket(7) and setsockopt(2). 
 
-## 8. Modify the size of the segments sent by the client - by setting the option TCP_MAXSEG - recompile and check the effect in a client writing texts longer than the specified length. Is it possible to specify an MSS smaller than 88? If not, why not?
+### 8. Modify the size of the segments sent by the client - by setting the option TCP_MAXSEG - recompile and check the effect in a client writing texts longer than the specified length. Is it possible to specify an MSS smaller than 88? If not, why not?
 
-## 9. Now allow binding to a port that is already in use - by setting the option SO_REUSEADDR - (as long as there is no active listening socket already bound to it). Observe the result of setting this option by revisiting question 4. 
+### 9. Now allow binding to a port that is already in use - by setting the option SO_REUSEADDR - (as long as there is no active listening socket already bound to it). Observe the result of setting this option by revisiting question 4. 
