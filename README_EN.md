@@ -1,6 +1,6 @@
 # Sequential servers with sockets API
 
-###Support Materials 
+### Support Materials 
 * On-line man pages: socket(2), socket(7), send(2), recv(2), read(2), write(2), setsockopt(2), fcntl(2), select(2), tcp(7), ip(7).
 * Guide to using sockets by Brian "Beej" Hall
 * Tcpdump manual
@@ -96,7 +96,9 @@ Have a look to the server code (EchoServer_seq.c) and the comments and question 
 ./EchoServer_seq 8765
 Waiting for incomming connections at port 8765
 Incomming connection from 127.0.0.1 remote port 52589
+```
 
+```
 netstat -putan
 Active Internet connections (servers and established)
 Proto Recv-Q Send-Q Local Address Foreign Address State
