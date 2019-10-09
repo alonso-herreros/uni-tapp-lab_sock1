@@ -54,7 +54,7 @@ make
 Ejecute el servidor en el puerto 8xxx:
 
 ```
-~>./EchoServer_seq 8xxx
+./EchoServer_seq 8xxx
 ```
 
 y en otra ventana, ejecute el cliente:
@@ -77,6 +77,10 @@ Echa un vistazo al código del servidor en `EchoServer_seq.c`. Responde a las si
 ./EchoServer_seq 8765
 Waiting for incomming connections at port 8765
 Incomming connection from 127.0.0.1 remote port 52589
+```
+
+Asegurate que escucha en el puerto indicado:
+```
 netstat -ta
 Active Internet connections (servers and established)
 Proto Recv-Q Send-Q Local Address Foreign Address State
@@ -123,7 +127,7 @@ listening on lo, link-type EN10MB (Ethernet), capture size 65535 bytes
 16:28:57.554620 IP localhost.8888 > localhost.39363: Flags [P.], seq 1:6, ack 5, win 512, options [nop,nop,TS val 2951382 ecr 2951382], length 5
 ```
 
-### 3. Lanza el cliente un par de veces y finalízalo con CTRL-D o CTRL-C. Ahora mata el servidor con CTRL-C, ¿Qué se observa con el tcpdump? ¿Por qué? 
+### 3. Lanza el cliente un par de veces y finalízalo con CTRL-D o CTRL-C. Ahora mata el servidor con CTRL-C ¿Qué se observa con el tcpdump? ¿Por qué? 
 
 **Solucione el problema. No continúe sin solucionarlo (deberá editar el código fuente)**
 
@@ -138,11 +142,11 @@ tcp 0 0 127.0.0.1:8888 127.0.0.1:39363 ESTABLISHED
 
 A partir de ahora vamos a lanzar los clientes en una máquina distinta. Para ello en una ventana nueva ejecuta el comando slogin o ssh (para ejecutar comandos en otra máquina – uso ssh nombrehost o ssh dirIP). Necesitaremos parar y rearrancar el tcpdump, esta vez sin especificar la interfaz (eliminar el parámetro –i lo pero manteniendo el puerto), de tal forma que se monitoriza el tráfico por todas las interfaces de red salvo por el bucle local.
 
-### 4. Vuelve a arrancar el servidor (ya modificado), arranca un cliente y mata el servidor sin matar al cliente. ¿Qué ocurre al arrancar el servidor de nuevo? ¿Por qué? **No continúe sin averiguarlo**
+### 4. Vuelve a arrancar el servidor (ya modificado), arranca un cliente y mata el servidor sin matar al cliente ¿Qué ocurre al arrancar el servidor de nuevo? ¿Por qué? **No continúe sin averiguarlo** Mata el cliente, espera unos pocos segundos y lanza de nuevo el servidor. 
 
-### 5. Mata el cliente, espera unos pocos segundos y lanza de nuevo el servidor. Lanza ahora dos clientes de eco contra el mismo servidor (desde dos máquinas distintas). ¿Qué ocurre si después de lanzar el primer cliente, lanzamos el segundo? Envía información desde ambos clientes ¿Qué ocurre?
+### 5. Lanza ahora dos clientes de eco contra el mismo servidor (desde dos máquinas distintas) ¿Qué ocurre si después de lanzar el primer cliente, lanzamos el segundo? Envía información desde ambos clientes ¿Qué ocurre?
 
-### 6. Mata al segundo cliente y después al primero. Debe de observar una trama de RESET, ¿Por qué?
+### 6. Mata al segundo cliente y después al primero. Debe de observar una trama de RESET ¿Por qué?
 
 ### 7. Cambia el tamaño de la cola de conexiones (backlog del socket) del servidor, definido por la constante BACKLOG, en el fichero EchoServer_seq.c, a 1 y recompila el código. Ahora lanza cuatro clientes de eco desde otra máquina. ¿Qué aprecia desde tcpdump? ¿Qué explicación se te ocurre?
 
