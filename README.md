@@ -79,7 +79,7 @@ Waiting for incomming connections at port 8765
 Incomming connection from 127.0.0.1 remote port 52589
 ```
 
-Asegurate que escucha en el puerto indicado:
+Asegurate que el servidor está escuchando en el puerto indicado:
 ```
 netstat -ta
 Active Internet connections (servers and established)
