@@ -15,7 +15,7 @@ Descripción de las prácticas de sockets Las prácticas de sockets se dividen e
 2. Servidores concurrentes (procesos, hilos).
 3. Entrada/Salida I/O (manejadores de señales, mecanismos de polling, select)
 
-El objetivo de estas prácticas es entender y resolver las preguntas que se formulan a continuación. No es necesario entregar las respuestas, a menos que tengáis interés en tener retroalimentación del profesor (por correo electrónico), de cara al examen de prácticas final. 
+El **objetivo** de estas prácticas es entender y resolver las preguntas que se formulan a continuación. No es necesario entregar las respuestas, a menos que tengáis interés en tener retroalimentación del profesor (por correo electrónico), de cara al examen de prácticas final. 
 
 ## Servidores secuenciales 
 
@@ -142,7 +142,7 @@ tcp 0 0 127.0.0.1:39363 127.0.0.1:8888 ESTABLISHED
 tcp 0 0 127.0.0.1:8888 127.0.0.1:39363 ESTABLISHED
 ```
 
-A partir de ahora vamos a lanzar los clientes en una máquina distinta. Para ello en una ventana nueva ejecuta el comando slogin o ssh (para ejecutar comandos en otra máquina – uso ssh nombrehost o ssh dirIP). Necesitaremos parar y rearrancar el tcpdump, esta vez sin especificar la interfaz (eliminar el parámetro –i lo pero manteniendo el puerto), de tal forma que se monitoriza el tráfico por todas las interfaces de red salvo por el bucle local.
+**A partir de ahora vamos a lanzar los clientes en una máquina distinta**. Para ello en una ventana nueva ejecuta el comando slogin o ssh (para ejecutar comandos en otra máquina – uso ssh nombrehost o ssh dirIP). Necesitaremos parar y rearrancar el tcpdump, esta vez sin especificar la interfaz (eliminar el parámetro –i lo pero manteniendo el puerto), de tal forma que se monitoriza el tráfico por todas las interfaces de red salvo por el bucle local.
 
 ### 4. Vuelve a arrancar el servidor (ya modificado), arranca un cliente y mata el servidor sin matar al cliente ¿En qué estado se encuentra el servidor? Ahora, mata al cliente ¿Cambia el estado del servidor? ¿Qué ocurre al arrancar el servidor de nuevo (no esperes mucho tiempo)? ¿Por qué? **No continúe sin averiguarlo**. Mata el cliente, espera unos pocos segundos y lanza de nuevo el servidor. 
 
