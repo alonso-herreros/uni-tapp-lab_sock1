@@ -160,7 +160,7 @@ Vamos a manipular las opciones del socket que utiliza el cliente utilizando sets
 
 ```c
 int maxseg = 88;
-if (setsockopt(sockfd, SOL_TCP, TCP_MAXSEG, &maxseg,sizeof(maxseg)==-1))
+if (setsockopt(sockfd, SOL_TCP, TCP_MAXSEG, &maxseg,sizeof(maxseg))==-1)
 {…}
 ```
 
