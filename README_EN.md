@@ -171,4 +171,12 @@ if (setsockopt(s,SOL_SOCKET,SO_REUSEADDR,&yes, sizeof(int)) != 0) {
 }
 ```
 
-### 9. Modify the size of the segments sent by the client - by setting the option TCP_MAXSEG - recompile and check the effect in a client writing texts longer than the specified length. Is it possible to specify an MSS smaller than 88? If not, why not?
+### 9. Modify the size of the segments sent by the client - by setting the option TCP_MAXSEG - 
+
+```c
+int maxseg = 88;
+if (setsockopt(sockfd, SOL_TCP, TCP_MAXSEG, &maxseg,sizeof(maxseg))==-1)
+{…}
+```
+
+Recompile and check the effect in a client writing texts longer than the specified length. Is it possible to specify an MSS smaller than 88? If not, why not?
