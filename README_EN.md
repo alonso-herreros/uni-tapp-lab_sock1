@@ -158,18 +158,17 @@ From here on, we use remote clients which we will start after executing the slog
 
 ### 6. Now kill the second client and then kill the first. You should observe a RESET frame. Why?
 
-### 7. Change the size of the connection queue (backlog of the socket) of the server, defined by the constant BACKLOG in the file EchoServer_seq, to 1. Now re-start four echo clients from another host. What do you notice in tcpdump? Kill the last client to be started. What is the effect of doing so? What explanation can you give for this?
+### 7. Change the size of the connection queue (backlog of the socket) of the server, defined by the constant BACKLOG in the file EchoServer_seq, to 1. Now compile and re-start four echo clients from another host. What do you notice in tcpdump? Kill the last client to be started. What is the effect of doing so? What explanation can you give for this?
 
-We are now going to use setsockopt to set socket options offered to the client. One such option is the choice of whether or not to use the Nagle algorithm. In the code supplied, the Nagle algorithm can be disabled by uncommenting the following lines of code in the file TCPecho.c just before the call to socket:
+We are now going to use setsockopt to set socket options offered to the client. One such option is the choice of whether or not to use the Nagle algorithm. However, with the Linux kernel installed in the labs, the effect of setting this option is not visible. For this reason we will not experiment with it but will instead check the effect of setting two of the other possible options. For more information about the other socket options that can be set, consult the man pages ip(7), tcp(7), socket(7) and setsockopt(2). 
 
+### 8. Now allow to bind to a port that is already in use -by setting SO_REUSEADDR option (as long as there is no active listening socket already bound to it) with setsockopt function-. For that, uncomment the code lines in the EchoServer_seq.c y recompile the code. Observe the result of setting this option by revisiting question 4. 
 ```c
-int no_nagle=1;
-if (setsockopt(s,SOL_TCP,TCP_NODELAY,&no_nagle, sizeof(no_nagle)) != 0)
-errexit("setsockopt: no puedo deshabilitar Nagle");
+int yes=1;
+if (setsockopt(s,SOL_SOCKET,SO_REUSEADDR,&yes, sizeof(int)) != 0) {
+    perror("setsockopt");
+    exit(1);
+}
 ```
 
-However, with the Linux kernel installed in the labs, the effect of setting this option is not visible. For this reason we will not experiment with it but will instead check the effect of setting two of the other possible options. For more information about the other socket options that can be set, consult the man pages ip(7), tcp(7), socket(7) and setsockopt(2). 
-
-### 8. Modify the size of the segments sent by the client - by setting the option TCP_MAXSEG - recompile and check the effect in a client writing texts longer than the specified length. Is it possible to specify an MSS smaller than 88? If not, why not?
-
-### 9. Now allow binding to a port that is already in use - by setting the option SO_REUSEADDR - (as long as there is no active listening socket already bound to it). Observe the result of setting this option by revisiting question 4. 
+### 9. Modify the size of the segments sent by the client - by setting the option TCP_MAXSEG - recompile and check the effect in a client writing texts longer than the specified length. Is it possible to specify an MSS smaller than 88? If not, why not?
