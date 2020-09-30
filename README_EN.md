@@ -158,7 +158,7 @@ From here on, we use remote clients which we will start after executing the slog
 
 ### 6. Now kill the second client and then kill the first. You should observe a RESET frame. Why?
 
-### 7. Change the size of the connection queue (backlog of the socket) of the server, defined by the constant QLEN in the file TCPechod_seq, to 1. Now re-start four echo clients from another host. What do you notice in tcpdump? Kill the last client to be started. What is the effect of doing so? What explanation can you give for this?
+### 7. Change the size of the connection queue (backlog of the socket) of the server, defined by the constant BACKLOG in the file EchoServer_seq, to 1. Now re-start four echo clients from another host. What do you notice in tcpdump? Kill the last client to be started. What is the effect of doing so? What explanation can you give for this?
 
 We are now going to use setsockopt to set socket options offered to the client. One such option is the choice of whether or not to use the Nagle algorithm. In the code supplied, the Nagle algorithm can be disabled by uncommenting the following lines of code in the file TCPecho.c just before the call to socket:
 
