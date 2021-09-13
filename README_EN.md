@@ -179,7 +179,7 @@ if (setsockopt(sockfd, SOL_TCP, TCP_MAXSEG, &maxseg,sizeof(maxseg))==-1)
 {…}
 ```
 
-
+> It may happen, as it depends on the linux kernel version, that the minimum value of TCP_MAXSEG is different. It may also happen changing that parameter has no effect on the the loopbak interface (localhost) but it has for physical interfaces (eth0, eth1...) 
 
 
 Recompile and check the effect in a client writing texts longer than the specified length. **Is it possible to specify an MSS smaller than 88? If not, why not?**
