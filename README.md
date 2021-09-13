@@ -37,18 +37,18 @@ Puedes refrescar la diferencia entre pasivos y activos así como las llamadas al
 En esta práctica dispone de todos los ficheros necesarios para probar un servidor secuencial (se encuentra el código de un servidor de eco secuencial, y de un cliente de eco). Para ello, use el siguiente comando:
 
  ```
- git -c http.sslVerify=false clone https://gitlab.pervasive.it.uc3m.es/aptel/sockets1_sequential_servers.git
+ git clone https://gitlab.gast.it.uc3m.es/aptel/sockets1_sequential_servers.git
  ```
 
- Encontrarás dos ficheros: El primero es EchoServer_seq.c, que implementa el servidor. El segundo es EchoClient.c que implementa el cliente. El protocolo que implementan es ECHO sobre TCP/IP. En dicho servicio, el cliente de echo se conecta a un servidor de echo que copia de vuelta todo lo enviado por el cliente.
+ Encontrarás dos ficheros: El primero es `EchoServer_seq.c`, que implementa el servidor. El segundo es `EchoClient.c` que implementa el cliente. El protocolo que implementan es ECHO sobre TCP/IP. En dicho servicio, el cliente de echo se conecta a un servidor de echo que copia de vuelta todo lo enviado por el cliente.
  
 ## Actividades
  
 ### 1. Compila y ejecuta los ejemplos
  
- > En la explicación de la práctica se habla del puerto 8xxx, esto indica que debéis utilizar como puerto el resultado de sumarle a 8000 los tres últimos números de la dirección IP de la máquina en la que ejecuta el servidor. De esta forma, evitamos interferencias entre las prácticas realizadas por los diferentes grupos.
+ > En la explicación de la práctica se habla del puerto `8xxx`, esto indica que debéis utilizar como puerto el resultado de sumarle a `8000` los tres últimos números de la dirección IP de la máquina en la que ejecuta el servidor. De esta forma, evitamos interferencias entre las prácticas realizadas por los diferentes grupos.
  
- Compile:
+Compile:
 ```
 make clean
 make
