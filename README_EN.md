@@ -15,26 +15,26 @@ The sockets assignment is divided into the following three parts:
 3. Input/output (signal handlers, poll, select)
 
 Sequential servers are the simplest type of servers. They are generally used in services offered vía UDP
-(with sockets of type SOCK_DGRAM), but can also be found in TCP-based services (with sockets of type
-SOCK_STREAM). The life-cyle of an application using a passive socket is as follows:
+(with sockets of type `SOCK_DGRAM`), but can also be found in TCP-based services (with sockets of type
+`SOCK_STREAM`). The life-cyle of an application using a passive socket is as follows:
 
-1. allocate the socket (socket)
-2. configure the socket (fill sockaddr_in structure)
-3. create the socket (open),
-4. associate the socket to a port (bind),
-5. put the socket in passive mode to prepare for incoming connections (listen),
-6. place the socket in the "waiting to handle incoming connections" state (accept), upon connection arrival, an active socket is generated
-7. read/write (read/write) or receive/send (recv/send) on the active socket
-8. close the active socket and free the connection (close),
+1. allocate the socket (`socket`)
+2. configure the socket (fill `sockaddr_in` structure)
+3. create the socket (`open`),
+4. associate the socket to a port (`bind`),
+5. put the socket in passive mode to prepare for incoming connections (`listen`),
+6. place the socket in the "waiting to handle incoming connections" state (`accept`), upon connection arrival, an active socket is generated
+7. read/write (`read`/`write`) or receive/send (`recv`/`send`) on the active socket
+8. close the active socket and free the connection (`close`),
 9. return to the waiting for connections state.
 
-<img src="https://gitlab.pervasive.it.uc3m.es/aptel/intro-sockets/raw/master/overview_of_system_calls_used_with_stream_sockets.png" width="500px">
+<img src="overview_of_system_calls_used_with_stream_sockets.png" width="500px">
 
 Download every file you need using:
 
 
  ```
- git -c http.sslVerify=false clone https://gitlab.pervasive.it.uc3m.es/aptel/sockets1_sequential_servers.git
+ git clone https://gitlab.gast.it.uc3m.es/aptel/sockets1_sequential_servers.git
  ```
  
 There are two main files of code in the folder. The first is `EchoSever_seq.c`, that implements the server.
@@ -178,5 +178,8 @@ int maxseg = 88;
 if (setsockopt(sockfd, SOL_TCP, TCP_MAXSEG, &maxseg,sizeof(maxseg))==-1)
 {…}
 ```
+
+
+
 
 Recompile and check the effect in a client writing texts longer than the specified length. **Is it possible to specify an MSS smaller than 88? If not, why not?**
