@@ -47,7 +47,14 @@ En esta práctica dispone de todos los ficheros necesarios para probar un servid
 ### 1. Compila y ejecuta los ejemplos
  
  > En la explicación de la práctica se habla del puerto `8xxx`, esto indica que debéis utilizar como puerto el resultado de sumarle a `8000` los tres últimos números de la dirección IP de la máquina en la que ejecuta el servidor. De esta forma, evitamos interferencias entre las prácticas realizadas por los diferentes grupos.
- 
+
+Dentro de la carpeta descargada, entra en `sockets1_sequential_servers/psockets1`
+
+```
+cd sockets1_sequential_servers
+cd psockets1
+```
+
 Compile:
 ```
 make clean
@@ -164,6 +171,7 @@ int maxseg = 88;
 if (setsockopt(sockfd, SOL_TCP, TCP_MAXSEG, &maxseg,sizeof(maxseg))==-1)
 {…}
 ```
+> En ocasiones, dependiendo del kernel de linux, el valor mínimo de TCP_MAXSEG puede ser diferente. Además, en ocasiones dicho parámetro puede no afectar al interfaz loopback (localhost) pero si a interfaces físicos (eth0, eth1...) 
 
 Recompila y comprueba este efecto en un cliente escribiendo textos más largos que la longitud especificada. ¿Es posible especificar MSS inferiores a 88?. 
 
