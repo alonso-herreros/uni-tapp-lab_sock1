@@ -20,17 +20,17 @@ El **objetivo** de estas prácticas es entender y resolver las preguntas que se 
 
 ## Servidores secuenciales 
 
-Los servidores secuenciales son los servidores más sencillos, generalmente los encontramos en servicios que se prestan por UDP (con sockets de tipo SOCK_DGRAM), pero también los podemos encontrar en servicios TCP (con sockets de tipo SOCK_STREAM).
+Los servidores secuenciales son los servidores más sencillos, generalmente los encontramos en servicios que se prestan por UDP (con sockets de tipo `SOCK_DGRAM`), pero también los podemos encontrar en servicios TCP (con sockets de tipo `SOCK_STREAM`).
 
 Puedes refrescar la diferencia entre pasivos y activos así como las llamadas al API aquí [introducción a sockets](https://gitlab.gast.it.uc3m.es/aptel/intro-sockets). El ciclo de vida de las aplicaciones que utilizan sockets pasivos es el siguiente:
 
-1. crear el socket (socket),
-2. configurar el socket (estructura sockaddr_in, función getaddrinfo),
-3. asociarlo con un puerto (bind),
-4. convertir el socket en un socket pasivo para prepararlo para recibir conexiones entrantes (listen),
-5. extraer una de las conexiones entrantes en espera y asociarla a un nuevo socket (accept),
-6. lectura/escritura (read/write) o recibir/enviar (recv/send),
-7. cierre del socket y liberación de la conexión (close),
+1. crear el socket (`socket`),
+2. configurar el socket (estructura `sockaddr_in`, función `getaddrinfo`),
+3. asociarlo con un puerto (`bind`),
+4. convertir el socket en un socket pasivo para prepararlo para recibir conexiones entrantes (`listen`),
+5. extraer una de las conexiones entrantes en espera y asociarla a un nuevo socket (`accept`),
+6. lectura/escritura (`read`/`write`) o recibir/enviar (`recv`/`send`),
+7. cierre del socket y liberación de la conexión (`close`),
 8. volver al estado de espera de conexiones.
 
 <img src="https://gitlab.gast.it.uc3m.es/aptel/intro-sockets/raw/master/overview_of_system_calls_used_with_stream_sockets.png" width="500px">
