@@ -1,4 +1,3 @@
-
 [English version](README_EN.md)
 
 # Servidores secuenciales con el API de sockets
