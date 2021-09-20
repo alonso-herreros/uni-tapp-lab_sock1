@@ -160,20 +160,20 @@ tcp 0 0 127.0.0.1:8888 127.0.0.1:39363 ESTABLISHED
 
 ### 7. Cambia el tamaño de la cola de conexiones (backlog del socket) del servidor, definido por la constante `BACKLOG`, en el fichero `EchoServer_seq.c`, a 1 y recompila el código. Ahora lanza cuatro clientes de eco desde otra máquina. ¿Qué aprecia desde tcpdump? ¿Qué explicación se te ocurre?
 
-Vamos a manipular las opciones del socket que utiliza el cliente utilizando setsockopt. Para más información sobre las opciones que pueden cambiarse, se sugiere **consultar las páginas del manual ip(7), tcp(7), setsockopt(2), socket(7)**.
+Vamos a manipular las opciones del socket que utiliza el cliente utilizando setsockopt. Para más información sobre las opciones que pueden cambiarse, se sugiere **consultar las páginas del manual `setsockopt(2)`, `socket(7)`, `ip(7)`, `tcp(7)`**.
 
-### 8. En primer lugar vamos a permitir enlazar un socket a un puerto que ya está en uso - activando la opción SO_REUSEADDR con la función setsockopt - (mientras no exista un socket pasivo en estado activo ya enlazado a él). Para ello, debes descomentar la línea de código apropiada en EchoServer_seq.c y recompilar el código. Observa el resultado de modificar esta opción revisando la pregunta 4.
+### 8. En primer lugar vamos a permitir enlazar un socket a un puerto que ya está en uso - activando la opción `SO_REUSEADDR` (nivel socket) con la función `setsockopt` - (mientras no exista un socket pasivo en estado activo ya enlazado a él). Para ello, debes descomentar la línea de código apropiada en `EchoServer_seq.c` y recompilar el código. Observa el resultado de modificar esta opción revisando la pregunta 4.
 
-### 9. Modifica ahora el tamaño de los segmentos enviados por el cliente, activando la opción TCP_MAXSEG (que se encuentra definida en <netinet/tcp.h>) con la función setsockopt:
+### 9. Modifica ahora el tamaño de los segmentos enviados por el cliente, activando la opción `TCP_MAXSEG` (que se encuentra definida en `<netinet/tcp.h>`) con la función `setsockopt`:
 
 ```c
 int maxseg = 88;
 if (setsockopt(sockfd, SOL_TCP, TCP_MAXSEG, &maxseg,sizeof(maxseg))==-1)
 {…}
 ```
-> En ocasiones, dependiendo del kernel de linux, el valor mínimo de TCP_MAXSEG puede ser diferente. Además, en ocasiones dicho parámetro puede no afectar al interfaz loopback (localhost), pero si a interfaces físicos (eth0, eth1...), de ahí la importancia de ejecutar los clientes desde una(s) máquina(s) distinta(s) a la del servidor.
+> En ocasiones, dependiendo del kernel de linux, el valor mínimo de `TCP_MAXSEG` puede ser diferente. Además, en ocasiones dicho parámetro puede no afectar al interfaz loopback (localhost), pero si a interfaces físicos (eth0, eth1...), de ahí la importancia de ejecutar los clientes desde una(s) máquina(s) distinta(s) a la del servidor.
 
-Recompila y comprueba este efecto en un cliente escribiendo textos más largos que la longitud especificada. ¿Es posible especificar MSS inferiores a 88?. 
+Recompila y comprueba este efecto en un cliente escribiendo textos más largos que la longitud especificada. ¿Es posible especificar MSS inferiores a 88?
 
 Si no se puede, ¿cuál crees que es el motivo?
 
