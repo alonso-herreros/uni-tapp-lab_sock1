@@ -3,7 +3,7 @@
 # Servidores secuenciales con el API de sockets
 
 ### Material de soporte
--  On-line man pages: socket(2), socket(7), send(2), recv(2), read(2), write(2), setsockopt(2), fcntl(2), select(2), tcp(7), ip(7).
+-  On-line man pages: `socket(2)`, `socket(7)`, `send(2)`, `recv(2)`, `read(2)`, `write(2)`, `setsockopt(2)`, `fcntl(2)`, `select(2)`, `tcp(7)`, `ip(7)`.
 -  Guide to using sockets by Brian "Beej" Hall
 -  Tcpdump manual
 -  Chapters 6, 7 y 8 of "Linux Socket Programming" by Sean Walton, Sams Publishing Co. 2001
@@ -11,7 +11,7 @@
 
 ### Prácticas con sockets
 Descripción de las prácticas de sockets Las prácticas de sockets se dividen en tres partes:
-1. Servidores secuenciales (cliente y servidor de eco, opciones de sockets, análisis con tcpdump, servidores de ficheros)
+**1. Servidores secuenciales (cliente y servidor de eco, opciones de sockets, análisis con tcpdump, servidores de ficheros)**
 2. Servidores concurrentes (procesos, hilos).
 3. Entrada/Salida I/O (manejadores de señales, mecanismos de polling, select)
 
@@ -141,7 +141,7 @@ listening on lo, link-type EN10MB (Ethernet), capture size 65535 bytes
 
 **Solucione el problema. No continúe sin solucionarlo (deberá editar el código fuente)**
 
-> Puede ser útil observar el estado de TCP utilizando para ello el comando: netstat -tn o netstat -putan
+> Puede ser útil observar el estado de TCP utilizando para ello el comando: `netstat -tn` o `netstat -putan`
 ```
 netstat -tn
 Active Internet connections (w/o servers)
@@ -158,7 +158,7 @@ tcp 0 0 127.0.0.1:8888 127.0.0.1:39363 ESTABLISHED
 
 ### 6. Mata al segundo cliente y después al primero. Debe de observar una trama de RESET ¿Por qué?
 
-### 7. Cambia el tamaño de la cola de conexiones (backlog del socket) del servidor, definido por la constante BACKLOG, en el fichero EchoServer_seq.c, a 1 y recompila el código. Ahora lanza cuatro clientes de eco desde otra máquina. ¿Qué aprecia desde tcpdump? ¿Qué explicación se te ocurre?
+### 7. Cambia el tamaño de la cola de conexiones (backlog del socket) del servidor, definido por la constante `BACKLOG`, en el fichero `EchoServer_seq.c`, a 1 y recompila el código. Ahora lanza cuatro clientes de eco desde otra máquina. ¿Qué aprecia desde tcpdump? ¿Qué explicación se te ocurre?
 
 Vamos a manipular las opciones del socket que utiliza el cliente utilizando setsockopt. Para más información sobre las opciones que pueden cambiarse, se sugiere **consultar las páginas del manual ip(7), tcp(7), setsockopt(2), socket(7)**.
 
