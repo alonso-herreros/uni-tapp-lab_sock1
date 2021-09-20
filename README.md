@@ -164,14 +164,14 @@ Vamos a manipular las opciones del socket que utiliza el cliente utilizando sets
 
 ### 8. En primer lugar vamos a permitir enlazar un socket a un puerto que ya está en uso - activando la opción SO_REUSEADDR con la función setsockopt - (mientras no exista un socket pasivo en estado activo ya enlazado a él). Para ello, debes descomentar la línea de código apropiada en EchoServer_seq.c y recompilar el código. Observa el resultado de modificar esta opción revisando la pregunta 4.
 
-### 9. Modifica ahora el tamaño de los segmentos enviados por el cliente, activando la opción TCP_MAXSEG con la función setsockopt:
+### 9. Modifica ahora el tamaño de los segmentos enviados por el cliente, activando la opción TCP_MAXSEG (que se encuentra definida en <netinet/tcp.h>) con la función setsockopt:
 
 ```c
 int maxseg = 88;
 if (setsockopt(sockfd, SOL_TCP, TCP_MAXSEG, &maxseg,sizeof(maxseg))==-1)
 {…}
 ```
-> En ocasiones, dependiendo del kernel de linux, el valor mínimo de TCP_MAXSEG puede ser diferente. Además, en ocasiones dicho parámetro puede no afectar al interfaz loopback (localhost) pero si a interfaces físicos (eth0, eth1...), de ahí la importancia de ejecutar los clientes desde una(s) máquina(s) distinta(s) a la del servidor.
+> En ocasiones, dependiendo del kernel de linux, el valor mínimo de TCP_MAXSEG puede ser diferente. Además, en ocasiones dicho parámetro puede no afectar al interfaz loopback (localhost), pero si a interfaces físicos (eth0, eth1...), de ahí la importancia de ejecutar los clientes desde una(s) máquina(s) distinta(s) a la del servidor.
 
 Recompila y comprueba este efecto en un cliente escribiendo textos más largos que la longitud especificada. ¿Es posible especificar MSS inferiores a 88?. 
 
