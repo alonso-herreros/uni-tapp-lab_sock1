@@ -1,7 +1,7 @@
 # Sequential servers with sockets API
 
 ### Support Materials 
-* On-line man pages: socket(2), socket(7), send(2), recv(2), read(2), write(2), setsockopt(2), fcntl(2), select(2), tcp(7), ip(7).
+* On-line man pages: `socket(2)`, `socket(7)`, `send(2)`, `recv(2)`, `read(2)`, `write(2)`, `setsockopt(2)`, `fcntl(2)`, `select(2)`, `tcp(7)`, `ip(7)`.
 * Guide to using sockets by Brian "Beej" Hall
 * Tcpdump manual
 * Chapters 6, 7 y 8 of "Linux Socket Programming" by Sean Walton, Sams Publishing Co. 2001
@@ -14,9 +14,16 @@ The sockets assignment is divided into the following three parts:
 2. Concurrent servers (processes, threads).
 3. Input/output (signal handlers, poll, select)
 
+
+The **objective** of these labs is to understand and solve the questions that are presented below. It is not necessary to submit the answers unless you are interested in receiving feedback from the professor (via email).
+
+## Servidores secuenciales 
+
 Sequential servers are the simplest type of servers. They are generally used in services offered vía UDP
 (with sockets of type `SOCK_DGRAM`), but can also be found in TCP-based services (with sockets of type
-`SOCK_STREAM`). The life-cyle of an application using a passive socket is as follows:
+`SOCK_STREAM`). 
+
+You can review the difference between passive and active sockets as well as the API calls here: [Intro-sockets](https://gitlab.gast.it.uc3m.es/aptel/intro-sockets/-/blob/master/README_EN.md). The life-cyle of an application using a passive socket is as follows:
 
 1. allocate the socket (`socket`)
 2. configure the socket (fill `sockaddr_in` structure)
@@ -28,10 +35,9 @@ Sequential servers are the simplest type of servers. They are generally used in 
 8. close the active socket and free the connection (`close`),
 9. return to the waiting for connections state.
 
-<img src="overview_of_system_calls_used_with_stream_sockets.png" width="500px">
+<img src="https://gitlab.gast.it.uc3m.es/aptel/intro-sockets/raw/master/overview_of_system_calls_used_with_stream_sockets.png" width="500px">
 
-Download every file you need using:
-
+In this practice, you have all the necessary files to test a sequential server (the code for a sequential echo server and an echo client is available). To use it, download the code with the following command:
 
  ```
  git clone https://gitlab.gast.it.uc3m.es/aptel/sockets1_sequential_servers.git
@@ -47,6 +53,13 @@ sent back to the client.
 ### 1. Compile and execute the examples 
 
 > In the explanation of this practical assignment, we write port 8xxx to denote the result of adding 8000 to the last three digits of the IP address of the machine on which the server executes; this procedure ensures that there is no interference between different student groups. 
+
+Inside the downloaded folder, navigate to sockets1_sequential_servers/psockets1 using the following commands:
+```
+cd sockets1_sequential_servers
+cd psockets1
+```
+
 
 Compile:
  ```
@@ -68,7 +81,7 @@ and in another window, start the client:
  
 and see how it behaves. 
 
-> The <server host> parameter is either the hostname or the IP address of the server. Hostnames are human-readable nicknames that correspond to the address of a device connected to a network. This kind of hostname is translated into an IP address via the local hosts file, or the Domain Name System (DNS) resolver. Look to the label of your computer. You will find something like it001.lab.it.uc3m.es and
+> The `server host` parameter is either the hostname or the IP address of the server. Hostnames are human-readable nicknames that correspond to the address of a device connected to a network. This kind of hostname is translated into an IP address via the local hosts file, or the Domain Name System (DNS) resolver. Look to the label of your computer. You will find something like it001.lab.it.uc3m.es and
 an IP address. The first is the hostname, the second is the IP assigned to that hostname. You can find the IP of any machine using dig, for instance:
 ```
 dig it001.lab.it.uc3m.es
@@ -83,13 +96,11 @@ it001.lab.it.uc3m.es. 60 IN A 163.117.144.201
 > -The real IP (in this case within the uc3m network) that starts with 163.117 (uc3m) so
 > will be something like: 163.117.XXX.XXX 
 
-Have a look to the server code (EchoServer_seq.c) and the comments and question yourself about the following:
+Have a look to the server code (`EchoServer_seq.c`) and the comments and question yourself about the following:
 
-* In which address or addresses does the passive socket listen for incoming traffic at the specified port?
 * which variable stores the passive socket?
 * which stores the active socket?
 * when do you get the active socket?
-* which ports and IP addresses are involved? 
 
 > To verify if your server is listening appropriately, execute your server and use netstat in the following way (example-look at red line-an * in address means all the addresses):
 ```
@@ -122,6 +133,11 @@ tcp6 0 0 [::]:32769 [::]:* LISTEN
 
 We are now going to observe the TCP connections with the tcpdump tool. We instruct the tool to report on the entire traffic passing via the local-loop interface (loopback) whose origin or destination port is 8xxx.
 
+> You should understand that each machine has at least two network interfaces:
+> - Network standards for IPv4 reserve the 127.0.0.0/8 segment for loopback. This means that any packet sent to one of these addresses (from 127.0.0.1 to 127.255.255.254) will be looped back to the source.
+> - The actual IP address (in this case, within the university network) starting with 163.117 (uc3m) should look something like: 163.117.XXX.XXX.
+
+
 ### 2. Execute the following command in another window: 
 
 ```
@@ -143,13 +159,16 @@ Re-start the client and observe the exchange of frames with tcpdump (connection 
 
 ### 3. Start the client a couple of times and terminate it with CTRL-D or CTRL-C. Now kill the server with CTRL-C. What do you observe with tcpdump? Why? 
 
-**Solve the problem**
-You may find it useful to observe the status of the client's network connections using the command:
+**Solve the problem. Do not proceed without resolving it (you will need to edit the source code).**
 
+> You may find it useful to observe the status of the client's network connections using the command: `netstat -tn` o `netstat -putan`
 ```
-netstat –tn 
+netstat -tn
+Active Internet connections (w/o servers)
+Proto Recv-Q Send-Q Local Address Foreign Address State
+tcp 0 0 127.0.0.1:39363 127.0.0.1:8888 ESTABLISHED
+tcp 0 0 127.0.0.1:8888 127.0.0.1:39363 ESTABLISHED
 ```
-
 From here on, we use remote clients which we will start after executing the slogin or ssh command (to execute commands on another machine). We will need to stop and re-start tcpdump, this time without specifying the interface so that it monitors the traffic on all interfaces except the local loop. 
 
 ### 4. Restart the (modified) server, start the client and kill the server without killing the client. What happens on re-starting the server? Why?
@@ -160,9 +179,10 @@ From here on, we use remote clients which we will start after executing the slog
 
 ### 7. Change the size of the connection queue (backlog of the socket) of the server, defined by the constant BACKLOG in the file EchoServer_seq, to 1. Now compile and re-start four echo clients from another host. What do you notice in tcpdump? Kill the last client to be started. What is the effect of doing so? What explanation can you give for this?
 
-We are now going to use setsockopt to set socket options offered to the client. One such option is the choice of whether or not to use the Nagle algorithm. However, with the Linux kernel installed in the labs, the effect of setting this option is not visible. For this reason we will not experiment with it but will instead check the effect of setting two of the other possible options. For more information about the other socket options that can be set, consult the man pages ip(7), tcp(7), socket(7) and setsockopt(2). 
+We are now going to use setsockopt to set socket options offered to the client. One such option is the choice of whether or not to use the Nagle algorithm. However, with the Linux kernel installed in the labs, the effect of setting this option is not visible. For this reason we will not experiment with it but will instead check the effect of setting two of the other possible options. For more information about the other socket options that can be set, consult the man pages `setsockopt(2)`, `socket(7)`, `ip(7)`, and `tcp(7)`. 
 
-### 8. Now allow to bind to a port that is already in use -by setting SO_REUSEADDR option (as long as there is no active listening socket already bound to it) with setsockopt function-. For that, uncomment the code lines in the EchoServer_seq.c y recompile the code. Observe the result of setting this option by revisiting question 4. 
+### 8. Now allow to bind to a port that is already in use -by setting `SO_REUSEADDR `option (as long as there is no active listening socket already bound to it) with `setsockopt` function-. For that, uncomment the code lines in the `EchoServer_seq.c` y recompile the code. Observe the result of setting this option by revisiting question 4. 
+
 ```c
 int yes=1;
 if (setsockopt(s,SOL_SOCKET,SO_REUSEADDR,&yes, sizeof(int)) != 0) {
