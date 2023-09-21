@@ -191,7 +191,7 @@ if (setsockopt(s,SOL_SOCKET,SO_REUSEADDR,&yes, sizeof(int)) != 0) {
 }
 ```
 
-### 9. Modify the size of the segments sent by the client - by setting the option TCP_MAXSEG - 
+### 9. Modify the size of the segments sent by the client - by setting the option TCP_MAXSEG (which is defined in `<netinet/tcp.h>`) 
 
 ```c
 int maxseg = 88;
