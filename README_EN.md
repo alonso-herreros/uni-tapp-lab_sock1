@@ -169,7 +169,7 @@ Proto Recv-Q Send-Q Local Address Foreign Address State
 tcp 0 0 127.0.0.1:39363 127.0.0.1:8888 ESTABLISHED
 tcp 0 0 127.0.0.1:8888 127.0.0.1:39363 ESTABLISHED
 ```
-From here on, we use remote clients which we will start after executing the slogin or ssh command (to execute commands on another machine). We will need to stop and re-start tcpdump, this time without specifying the interface so that it monitors the traffic on all interfaces except the local loop. 
+**From here on, we will use remote clients** which we will start after executing the slogin or ssh command (to run commands on another machine - use ssh hostname or ssh dirIP). We will need to stop and re-start tcpdump, this time without specifying the interface so that it monitors the traffic on all interfaces except the local loop. 
 
 ### 4. Restart the (modified) server, start the client and kill the server without killing the client. What happens on re-starting the server? Why?
 
