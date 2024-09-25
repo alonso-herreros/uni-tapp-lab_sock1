@@ -122,7 +122,7 @@ Vamos a observar las conexiones TCP con la herramienta tcpdump. Vamos a decirle 
 ### 2. Ejecuta el siguiente comando en otra ventana:
 
 ```
-sudo tcpdump -i lo port 8xxx
+tcpdump -i lo port 8xxx
 ```
 
 Presiona alguna tecla en el cliente para ver el eco. Vuelve a lanzar el cliente y observa el intercambio de tramas con tcpdump (establecimiento de conexión, envío de datos en ambos sentidos, asentimientos y fin de conexión)
