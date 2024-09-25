@@ -129,7 +129,7 @@ Presiona alguna tecla en el cliente para ver el eco. Vuelve a lanzar el cliente 
 
 > Ejemplo de uso de tcpdump que muestra un establecimiento de conexión
 ```
-sudo tcpdump -i lo port 8888
+tcpdump -i lo port 8888
 tcpdump: verbose output suppressed, use -v or -vv for full protocol decode
 listening on lo, link-type EN10MB (Ethernet), capture size 65535 bytes
 16:28:57.553866 IP localhost.39363 > localhost.8888: Flags [P.], seq 470686013:470686018, ack 1031632982, win 513, options [nop,nop,TS val 2951382 ecr 2948837], length 5
