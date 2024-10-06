@@ -12,6 +12,7 @@
 #include <sys/types.h>
 #include <netinet/in.h>
 #include <sys/socket.h>
+#include <netinet/tcp.h>
 
 #include <arpa/inet.h>
 
@@ -59,6 +60,12 @@ int main(int argc, char *argv[])
 			perror("client: socket");
 			continue;
 		}
+
+        int maxseg = 88;
+        if (setsockopt(sockfd, SOL_TCP, TCP_MAXSEG, &maxseg,sizeof(maxseg))==-1) {
+            perror("setsockopt");
+            exit(1);
+        }
 
 		 
 		if (connect(sockfd, p->ai_addr, p->ai_addrlen) == -1) {
