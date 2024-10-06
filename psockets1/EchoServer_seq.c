@@ -144,6 +144,7 @@ TCPechod(int fd)
 			}
         }
         
+        close(fd);
 	
         return;
 }
